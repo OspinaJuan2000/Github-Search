@@ -7,6 +7,8 @@ const getInfoUser = async (user) => {
     if (response.ok) {
         const data = await response.json();
         return data;
+    } else {
+        throw 'Error';
     }
 }
 

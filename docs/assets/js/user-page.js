@@ -23,14 +23,13 @@ const events = () => {
             getInfoUser(username)
                 .then((data) => {
                     cleanLastUser();
-
                     if (data) {
                         renderDataUserHTML(data);
-                    } else {
+                    } else if (data === undefined) {
                         renderErrorHTML(`User not found! Try again`);
                     }
-                }).catch(() => {
-                    renderErrorHTML(`Something went wrong. Try again later!`);
+                }).catch((err) => {
+                    renderErrorHTML(`${err}: Something went wrong. Try again later!`);
                 });
         }
     });
