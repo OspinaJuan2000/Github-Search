@@ -12,8 +12,6 @@ const getInfoUser = async (user) => {
     }
 }
 
-
-
 export {
     getInfoUser,
 }
