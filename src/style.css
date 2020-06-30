@@ -48,7 +48,7 @@ font-family: 'Ubuntu', sans-serif;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    width: 98%;
+    width: 95%;
 }
 
 .container {
@@ -163,9 +163,10 @@ font-family: 'Ubuntu', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40rem;
+    height: 70vh;
     font-size: 2.5rem;
     display: none;
+    text-align: center;
 }
 
 .container-error i {
