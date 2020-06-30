@@ -1,8 +1,7 @@
-import { getInfoUser } from "./peticiones";
+import { getInfoUser } from "./peticiones.js";
 
 const formSearchUser = document.querySelector('#search-user'),
     containerUserData = document.querySelector('.container-data-user'),
-    containerError = document.querySelector('.container-error'),
     containerInput = document.querySelector('.container'),
     restartApp = document.querySelector('#again');
 
@@ -16,32 +15,24 @@ const events = () => {
         const username = formSearchUser['username'].value;
 
         if (username.trim() !== '') {
+            getInfoUser(username).then((data) => {
 
-            containerInput.style.display = 'none';
-            containerUserData.style.display = 'block';
-
-            getInfoUser(username)
-                .then((data) => {
-                    cleanLastUser();
-                    if (data) {
-                        renderDataUserHTML(data);
-                    } else if (data === undefined) {
-                        renderErrorHTML(`User not found! Try again`);
-                    }
-                }).catch((err) => {
-                    renderErrorHTML(`${err}: Something went wrong. Try again later!`);
-                });
+                formSearchUser.reset();
+                containerInput.style.display = 'none';
+                containerUserData.style.display = 'block';
+                renderDataUserHTML(data);
+            });
         }
     });
 
     restartApp.addEventListener('click', () => {
-        containerError.style.display = 'none';
         containerInput.style.display = 'flex';
         containerUserData.style.display = 'none';
     });
 }
 
 const renderDataUserHTML = ({ login, avatar_url, html_url, public_repos, followers, following, created_at }) => {
+
 
     const templateHTML = `
     <section class="user-data">
@@ -58,21 +49,15 @@ const renderDataUserHTML = ({ login, avatar_url, html_url, public_repos, followe
     </section>
     `;
 
+    cleanLastUser();
+
     const div = document.createElement('div');
     div.innerHTML = templateHTML;
     containerUserData.appendChild(div.firstElementChild);
 }
 
 
-const renderErrorHTML = (msj) => {
-    document.querySelector('#error-msg a').textContent = msj;
-    containerError.style.display = 'flex';
-}
-
-
 const cleanLastUser = () => {
-    formSearchUser.reset();
-
     if (document.querySelector('.user-data')) {
         document.querySelector('.user-data').remove();
     }
