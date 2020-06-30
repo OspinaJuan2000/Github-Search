@@ -41,6 +41,8 @@ const events = () => {
 
 const renderDataUserHTML = ({ login, avatar_url, html_url, public_repos, followers, following, created_at }) => {
 
+    containerError.style.display = 'none';
+    formSearchUser.reset();
 
     const templateHTML = `
     <section class="user-data">

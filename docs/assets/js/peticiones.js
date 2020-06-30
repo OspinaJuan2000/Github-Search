@@ -8,9 +8,6 @@ const getInfoUser = async (user) => {
         const data = await response.json();
         return data;
     }
-    else {
-        throw ('No encontrado');
-    }
 }
 
 
