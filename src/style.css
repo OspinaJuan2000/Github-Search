@@ -44,7 +44,7 @@ font-family: 'Roboto', sans-serif;
 font-family: 'Ubuntu', sans-serif;
 */
 
-.container, .container-data-user {
+.container, .container-data-user, .container-error {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
@@ -156,6 +156,33 @@ font-family: 'Ubuntu', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.container-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40rem;
+    font-size: 2.5rem;
+    display: none;
+}
+
+.container-error i {
+    color: var(--blueColor);
+}
+
+.container-error a {
+    transition: color .3s;
+}
+
+.container-error a:hover {
+    color: var(--blueColor);
+}
+
+@media (min-width: 768px) {
+    .container-error {
+        height: 60rem;
+    }
 }
 
 .search-user input, button {

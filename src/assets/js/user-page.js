@@ -1,7 +1,8 @@
-import { getUser } from "./peticiones";
+import { getInfoUser } from "./peticiones";
 
 const formSearchUser = document.querySelector('#search-user'),
     containerUserData = document.querySelector('.container-data-user'),
+    containerError = document.querySelector('.container-error'),
     containerInput = document.querySelector('.container'),
     restartApp = document.querySelector('#again');
 
@@ -15,11 +16,20 @@ const events = () => {
         const username = formSearchUser['username'].value;
 
         if (username.trim() !== '') {
-            getUser(username).then((data) => {
-                containerInput.style.display = 'none';
-                containerUserData.style.display = 'block';
-                renderDataUserHTML(data);
-            });
+
+            containerInput.style.display = 'none';
+            containerUserData.style.display = 'block';
+
+            getInfoUser(username)
+                .then((data) => {
+                    if (data) {
+                        renderDataUserHTML(data);
+                    } else {
+                        renderErrorHTML(`User not found! Try again`);
+                    }
+                }).catch(() => {
+                    renderErrorHTML(`Something went wrong. Try again later!`);
+                });
         }
     });
 
@@ -52,6 +62,12 @@ const renderDataUserHTML = ({ login, avatar_url, html_url, public_repos, followe
     const div = document.createElement('div');
     div.innerHTML = templateHTML;
     containerUserData.appendChild(div.firstElementChild);
+}
+
+
+const renderErrorHTML = (msj) => {
+    document.querySelector('#error-msg a').textContent = msj;
+    containerError.style.display = 'flex';
 }
 
 

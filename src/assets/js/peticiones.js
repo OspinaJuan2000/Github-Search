@@ -1,16 +1,20 @@
 const gitHubUser = `https://api.github.com/users/`;
 
-const getUser = async (user) => {
+const getInfoUser = async (user) => {
 
     const response = await fetch(`${gitHubUser}${user}`);
 
-    const data = await response.json();
-
-    return data;
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    }
+    else {
+        throw ('No encontrado');
+    }
 }
 
 
 
 export {
-    getUser,
+    getInfoUser,
 }
