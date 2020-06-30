@@ -22,6 +22,8 @@ const events = () => {
 
             getInfoUser(username)
                 .then((data) => {
+                    cleanLastUser();
+
                     if (data) {
                         renderDataUserHTML(data);
                     } else {
@@ -42,7 +44,6 @@ const events = () => {
 const renderDataUserHTML = ({ login, avatar_url, html_url, public_repos, followers, following, created_at }) => {
 
     containerError.style.display = 'none';
-    formSearchUser.reset();
 
     const templateHTML = `
     <section class="user-data">
@@ -59,8 +60,6 @@ const renderDataUserHTML = ({ login, avatar_url, html_url, public_repos, followe
     </section>
     `;
 
-    cleanLastUser();
-
     const div = document.createElement('div');
     div.innerHTML = templateHTML;
     containerUserData.appendChild(div.firstElementChild);
@@ -74,6 +73,8 @@ const renderErrorHTML = (msj) => {
 
 
 const cleanLastUser = () => {
+    formSearchUser.reset();
+
     if (document.querySelector('.user-data')) {
         document.querySelector('.user-data').remove();
     }
