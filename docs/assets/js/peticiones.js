@@ -8,11 +8,9 @@ const getInfoUser = async (user) => {
         const data = await response.json();
         return data;
     } else {
-        throw 'Error';
+        throw 'Username does not exist';
     }
 }
-
-
 
 export {
     getInfoUser,

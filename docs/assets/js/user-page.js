@@ -15,13 +15,16 @@ const events = () => {
         const username = formSearchUser['username'].value;
 
         if (username.trim() !== '') {
-            getInfoUser(username).then((data) => {
-
-                formSearchUser.reset();
-                containerInput.style.display = 'none';
-                containerUserData.style.display = 'block';
-                renderDataUserHTML(data);
-            });
+            getInfoUser(username)
+                .then((data) => {
+                    formSearchUser.reset();
+                    containerInput.style.display = 'none';
+                    containerUserData.style.display = 'block';
+                    renderDataUserHTML(data);
+                })
+                .catch((err) => {
+                    alert(err);
+                })
         }
     });
 
