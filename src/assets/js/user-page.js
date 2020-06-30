@@ -36,14 +36,13 @@ const events = () => {
     });
 
     restartApp.addEventListener('click', () => {
+        containerError.style.display = 'none';
         containerInput.style.display = 'flex';
         containerUserData.style.display = 'none';
     });
 }
 
 const renderDataUserHTML = ({ login, avatar_url, html_url, public_repos, followers, following, created_at }) => {
-
-    containerError.style.display = 'none';
 
     const templateHTML = `
     <section class="user-data">
